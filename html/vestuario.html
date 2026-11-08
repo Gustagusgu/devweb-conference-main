@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore e compartilhe itens de vestuário no Meu Inventário.">
+    <title>Vestuário | Meu Inventário</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Meu Inventário - página inicial">
+                <img src="/imagens/logo.jpg" alt="Logo" class="brand-logo">
+                <span class="brand-copy"><strong>Meu Inventário</strong><small>Use, cuide, compartilhe.</small></span>
+            </a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="livros.html">Livros</a>
+                <a class="nav-link active" href="vestuario.html" aria-current="page">Vestuário</a>
+                <a class="nav-link" href="perfil.html">Meu perfil</a>
+                <a class="nav-link" href="sobre.html">Sobre</a>
+            </nav>
+            <a class="button button-small" href="index.html#cadastro">+ Cadastrar item</a>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        <!-- Hero da Categoria Vestuário -->
+        <section class="hero" style="padding: 40px 20px; background: #f4f6f8; margin-bottom: 30px;">
+            <div class="hero-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p class="eyebrow">MODA CONSCIENTE E COMPARTILHADA</p>
+                <h1>Vestuário & Acessórios</h1>
+                <p class="hero-description">Renove o seu guarda-roupa, encontre peças para ocasiões especiais ou empreste roupas e acessórios que estão parados no seu armário.</p>
+            </div>
+        </section>
+
+        <!-- Seção Principal de Vestuário -->
+        <section class="section" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="section-heading" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+                <div>
+                    <p class="eyebrow">EXPLORAR PEÇAS</p>
+                    <h2>Itens de Vestuário Disponíveis</h2>
+                    <p class="section-description">Filtre por tamanho, tipo de peça ou pesquise no inventário de vestuário.</p>
+                </div>
+                <button id="btn-fetch-vestuario-api" class="button button-outline">Importar Peças (API)</button>
+            </div>
+
+            <!-- Controles de Pesquisa, Filtro e Ordenação -->
+            <div class="controls-section toolbar" style="margin-bottom: 30px; display: flex; gap: 15px; flex-wrap: wrap; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <input type="text" id="search-vestuario" placeholder="Pesquisar por peça, tamanho ou dono..." style="flex: 1; min-width: 220px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                
+                <select id="filter-subcategoria" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="todos">Todos os Tipos</option>
+                    <option value="Casacos">Casacos & Jaquetas</option>
+                    <option value="Camisas">Camisas & Camisetas</option>
+                    <option value="Calças">Calças & Bermudas</option>
+                    <option value="Vestidos">Vestidos & Saias</option>
+                    <option value="Acessórios">Acessórios</option>
+                </select>
+
+                <select id="filter-tamanho" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="todos">Todos os Tamanhos</option>
+                    <option value="PP">PP</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                    <option value="GG">GG</option>
+                    <option value="Único">Tamanho Único</option>
+                </select>
+
+                <select id="sort-vestuario" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="">Ordenar por...</option>
+                    <option value="nome">Ordem Alfabética (A-Z)</option>
+                    <option value="tamanho">Tamanho</option>
+                </select>
+            </div>
+
+            <!-- Container Dinâmico dos Cards de Vestuário -->
+            <div id="vestuario-container" class="inventory-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <!-- Os itens de vestuário serão renderizados dinamicamente pelo JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Detalhes da Peça -->
+    <div id="details-modal" class="modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div class="modal-content" style="background: #fff; max-width: 450px; margin: 12% auto; padding: 25px; border-radius: 8px; position: relative;">
+            <span onclick="document.getElementById('details-modal').style.display='none'" class="close" style="position: absolute; right: 15px; top: 10px; cursor: pointer; font-size: 24px;">&times;</span>
+            <div id="modal-details-content"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer" style="margin-top: 50px;">
+        <div class="footer-inner">
+            <a class="footer-brand" href="index.html">Meu Inventário</a>
+            <p>Compartilhar objetos é uma forma de cuidar dos recursos.</p>
+            <nav aria-label="Links do rodapé">
+                <a href="sobre.html">Sobre o projeto</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+            <small>Projeto acadêmico • Interface demonstrativa</small>
+        </div>
+    </footer>
+
+    <!-- Script de Vestuário -->
+    <script src="vestuario.js"></script>
+</body>
+</html>
